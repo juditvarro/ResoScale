@@ -5,13 +5,14 @@ import Resource from '../../components/Resource/Resource'
 
 class Resources extends Component {
 
-  componentWillMount = () => {
+  componentDidMount = () => {
     this.props.onInitResources()
     console.log(this.props.resources)
-
   }
 
   render() {
+    console.log(this.props.resources)
+    console.log(this.props.error)
     // const resources = this.props.resources.map((resKey) => {
     //   return <div>resKey</div>
     // })
@@ -25,8 +26,10 @@ class Resources extends Component {
 const mapStateToProps = state => {
   return {
     resources: state.resoScaleReducer.resources,
+    error: state.resoScaleReducer.error
   }
 }
+
 
 const mapDispatchToProps = dispatch => {
   return {
