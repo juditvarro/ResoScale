@@ -1,0 +1,3 @@
+export {
+  initResources,
+} from './resources';

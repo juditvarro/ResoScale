@@ -1,0 +1,62 @@
+.Resolutioncard {
+  width: 100%;
+  background: #0a3d62;
+  height: 100%;
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #eee;
+  box-shadow: 0 2px 3px #ccc;
+  margin: 10px auto;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.ResName {
+  color: white;
+}
+
+.ResResource {
+  display: flex;
+}
+
+.ResList {
+  list-style: none;
+  width: 100%;
+  padding: 10px 0;
+}
+
+.ResListItem, .ResListItemHeaderPos, .ResListItemHeaderNeg {
+  text-transform: uppercase;
+  padding: 5px 0;
+  background: white;
+  border: 1px solid #eee;
+  box-shadow: 0 2px 3px #ccc;
+}
+
+.ResListItemHeaderPos {
+  background: #079992;
+  color: white;
+}
+
+.ResListItemHeaderNeg {
+  background: #b71540;
+  color: white;
+}
+
+.ResValueNeg {
+  color: #b71540;
+  font-weight: bold;
+}
+
+.ResValuePos {
+  color: #079992;
+  font-weight: bold;
+}
+
+@media (min-width: 600px) {
+  .Resolutioncard {
+    width: 400px;
+    /* left: calc(50% - 250px); */
+  }
+}

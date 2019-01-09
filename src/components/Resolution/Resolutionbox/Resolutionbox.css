@@ -1,0 +1,11 @@
+.Resolutionbox {
+  width: 120px;
+  background: white;
+  height: 120px;
+  text-align: center;
+  padding: 10px;
+  padding-top: 30px;
+  border: 1px solid #eee;
+  box-shadow: 0 2px 3px #ccc;
+  margin: 10px auto;
+}
