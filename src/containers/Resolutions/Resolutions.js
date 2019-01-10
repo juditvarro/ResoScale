@@ -51,12 +51,22 @@ class Resolutions extends Component {
     if (!this.props.resloading) {
       // console.log(this.props.rsltns)
       reslist = Object.keys(this.props.rsltns).map(res => {
-        // console.log(this.props.rsltns[res].title)
+        let budgetObject = {}
+        const resPlus = this.props.rsltns[res].resourceAdd
+        const resMinus = this.props.rsltns[res].resourceCost
+
+        Object.keys(resPlus).map(rscKey => {
+          budgetObject[rscKey] = resPlus[rscKey] - resMinus[rscKey]
+        })
+
+
+        // console.log(budgetObject)
+
 
         return (<Resolutionbox
           key={res}
           resMore={() => this.resMoreHandler(res)}
-          resAddRemove={() => this.props.onAddResolution(res)}
+          resAddRemove={() => this.props.onAddResolution(res, budgetObject)}
           title={this.props.rsltns[res].title}
           state={res.resClicked} />)
       })
@@ -70,7 +80,7 @@ class Resolutions extends Component {
         resCost={this.state.popUpRes.resourceCost}
         title={this.state.popUpRes.title}
       />)
-      console.log(resolutioncard)
+      // console.log(resolutioncard)
     }
 
 
@@ -95,7 +105,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onListinResources: () => dispatch(actions.fetchResolutions()),
-    onAddResolution: (resID) => dispatch(actions.addResolution(resID))
+    onAddResolution: (resID, budgetObject) => dispatch(actions.addResolution(resID, budgetObject))
 
   }
 }
