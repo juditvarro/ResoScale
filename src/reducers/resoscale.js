@@ -4,7 +4,7 @@ const initialState = {
   resources: null,
   error: false,
   resloading: false,
-  resolutions: []
+  resolutions: {}
 
 };
 
@@ -37,6 +37,22 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         resloading: false
+      }
+    case actionTypes.ADD_RESOLUTION:
+      const addedResolution = {
+        ...action.resData,
+        resAdded: true
+      }
+      console.log(addedResolution)
+      return {
+        ...state,
+        resolutions: {
+          ...state.resolutions,
+          [action.resID]: {
+            ...state.resolutions[action.resID],
+            resAdded: true
+          }
+        },
       }
     default:
       return state
