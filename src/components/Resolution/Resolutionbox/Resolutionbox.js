@@ -6,7 +6,7 @@ const resolutionbox = (props) => {
   return (<div className={classes.Resolutionbox}>
     <p style={{
       height: '40%'
-    }}>>{props.title}</p>
+    }}>{props.title}</p>
     <div style={{
       display: "flex",
       boxSizing: "border-box",

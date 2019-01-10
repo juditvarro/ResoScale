@@ -32,10 +32,8 @@ class Resolutions extends Component {
     console.log(selectedRes)
     this.setState({
       popUpResID: resID,
+      popUpRes: selectedRes,
       popUpResClicked: true,
-      popUpResTitle: selectedRes.title,
-      popUpResresValue: selectedRes.resourceAdd,
-      popUpResresCost: selectedRes.resourceCost
     })
 
 
@@ -69,9 +67,10 @@ class Resolutions extends Component {
     let resolutioncard = null;
     if (this.state.popUpResClicked) {
       resolutioncard = (<Resolutioncard
-        resValue={this.state.popUpResresValue}
-        resCost={this.state.popUpResresValue}
-        title={this.state.popUpResTitle} />)
+        resValue={this.state.popUpRes.resourceAdd}
+        resCost={this.state.popUpRes.resourceCost}
+        title={this.state.popUpRes.title}
+      />)
       console.log(resolutioncard)
     }
 
