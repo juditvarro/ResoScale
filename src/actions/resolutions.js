@@ -56,16 +56,18 @@ export const fetchResolutions = () => {
   }
 }
 
-export const addResolution = (resID) => {
+export const addResolution = (resID, budgetObject) => {
   return {
     type: actionTypes.ADD_RESOLUTION,
-    resID: resID
+    resID: resID,
+    budgetObject: budgetObject
   }
 }
 
-export const removeResolution = (resID) => {
+export const removeResolution = (resID, budgetObject) => {
   return {
     type: actionTypes.REMOVE_RESOLUTION,
     resID: resID,
+    budgetObject: budgetObject
   }
 }

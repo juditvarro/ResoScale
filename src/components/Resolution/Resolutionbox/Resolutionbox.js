@@ -3,6 +3,8 @@ import React from 'react';
 import Button from '../../UI/Button/Button'
 
 const resolutionbox = (props) => {
+
+
   return (<div className={classes.Resolutionbox}>
     <p style={{
       height: '40%'
@@ -13,7 +15,10 @@ const resolutionbox = (props) => {
       height: '20%'
     }}>
       <Button btnType='Success' clicked={props.resMore}>DETAILS</Button>
-      <Button btnType='Success' clicked={props.resAddRemove} state={props.resAdded}>{!props.resAdded ? 'ADD' : 'REMOVE'}</Button>
+      {!props.resAdded ? <Button btnType='Success' clicked={props.resAdd} state={props.resAdded}>ADD</Button> : <Button btnType='Success' clicked={props.resRemove} state={props.resAdded}>REMOVE</Button>
+
+      }
+
     </div>
 
   </div>);

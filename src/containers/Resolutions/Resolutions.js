@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Resolutionbox from '../../components/Resolution/Resolutionbox/Resolutionbox';
 import Resolutioncard from '../../components/Resolution/Resolutioncard/Resolutioncard';
 import Modal from '../../components/UI/Modal/Modal';
-import classes from './Resolutions.css'
+import classes from './Resolutions.css';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/index';
 import Spinner from '../../components/UI/Spinner/Spinner';
@@ -21,24 +21,15 @@ class Resolutions extends Component {
   }
 
   resMoreHandler = (resID) => {
-    console.log('clickedMore', resID)
     const selectedRes = this.props.rsltns[resID];
 
-    // console.log(selectedRes)
     this.setState({
       popUpResID: resID,
       popUpRes: selectedRes,
       popUpResClicked: true,
     })
-
-
   }
 
-  resAddRemoveHandler = (resID) => {
-    console.log('clickedADDMORE', resID)
-
-
-  }
 
   resClosedHandler = () => {
     this.setState({ popUpResClicked: false })
@@ -49,20 +40,27 @@ class Resolutions extends Component {
     let reslist = <Spinner />;
 
     if (!this.props.resloading) {
-      // console.log(this.props.rsltns)
+
       reslist = Object.keys(this.props.rsltns).map(res => {
-        // console.log(this.props.rsltns[res].title)
+        let budgetObject = {}
+        const resPlus = this.props.rsltns[res].resourceAdd
+        const resMinus = this.props.rsltns[res].resourceCost
+
+        Object.keys(resPlus).map(rscKey =>
+          budgetObject[rscKey] = resPlus[rscKey] - resMinus[rscKey]
+        )
+
 
         return (<Resolutionbox
           key={res}
           resMore={() => this.resMoreHandler(res)}
-          resAddRemove={() => this.props.onAddResolution(res)}
+          resAdd={() => this.props.onAddResolution(res, budgetObject)}
+          resRemove={() => this.props.onRemoveResolution(res, budgetObject)}
           title={this.props.rsltns[res].title}
-          state={res.resClicked} />)
+          resAdded={this.props.rsltns[res].resAdded} />)
       })
     }
 
-    // console.log(this.state.popUpResresValue)
     let resolutioncard = null;
     if (this.state.popUpResClicked) {
       resolutioncard = (<Resolutioncard
@@ -70,7 +68,6 @@ class Resolutions extends Component {
         resCost={this.state.popUpRes.resourceCost}
         title={this.state.popUpRes.title}
       />)
-      console.log(resolutioncard)
     }
 
 
@@ -95,8 +92,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onListinResources: () => dispatch(actions.fetchResolutions()),
-    onAddResolution: (resID) => dispatch(actions.addResolution(resID))
-
+    onAddResolution: (resID, budgetObject) => dispatch(actions.addResolution(resID, budgetObject)),
+    onRemoveResolution: (resID, budgetObject) => dispatch(actions.removeResolution(resID, budgetObject))
   }
 }
 

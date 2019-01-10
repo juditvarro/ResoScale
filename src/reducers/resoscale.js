@@ -39,18 +39,46 @@ const reducer = (state = initialState, action) => {
         resloading: false
       }
     case actionTypes.ADD_RESOLUTION:
-      const addedResolution = {
-        ...action.resData,
-        resAdded: true
-      }
-      console.log(addedResolution)
+
       return {
         ...state,
+        resources: {
+          ...state.resources,
+          'brain': state.resources['brain'] + action.budgetObject['brain'],
+          'energy': state.resources['energy'] + action.budgetObject['energy'],
+          'freetime': state.resources['freetime'] + action.budgetObject['freetime'],
+          'health': state.resources['health'] + action.budgetObject['health'],
+          'money': state.resources['money'] + action.budgetObject['money'],
+          'socialvalue': state.resources['socialvalue'] + action.budgetObject['socialvalue'],
+          'willpower': state.resources['willpower'] + action.budgetObject['willpower']
+        },
         resolutions: {
           ...state.resolutions,
           [action.resID]: {
             ...state.resolutions[action.resID],
             resAdded: true
+          }
+        },
+      }
+    case actionTypes.REMOVE_RESOLUTION:
+
+      return {
+        ...state,
+        resources: {
+          ...state.resources,
+          'brain': state.resources['brain'] - action.budgetObject['brain'],
+          'energy': state.resources['energy'] - action.budgetObject['energy'],
+          'freetime': state.resources['freetime'] - action.budgetObject['freetime'],
+          'health': state.resources['health'] - action.budgetObject['health'],
+          'money': state.resources['money'] - action.budgetObject['money'],
+          'socialvalue': state.resources['socialvalue'] - action.budgetObject['socialvalue'],
+          'willpower': state.resources['willpower'] - action.budgetObject['willpower']
+        },
+        resolutions: {
+          ...state.resolutions,
+          [action.resID]: {
+            ...state.resolutions[action.resID],
+            resAdded: false
           }
         },
       }
