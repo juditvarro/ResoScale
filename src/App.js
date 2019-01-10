@@ -9,12 +9,12 @@ class App extends Component {
     return (
       <div>
         <Layout>
-          (<Switch>
+          <Switch>
             <Route path='/aboutus' exact component={AboutUs} />
             <Route path='/' component={ResScale} />
             {/* for any unknown routes */}
             <Redirect to='/' />
-          </Switch>)
+          </Switch>
         </Layout>
       </div>
     );

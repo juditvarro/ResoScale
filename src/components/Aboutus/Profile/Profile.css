@@ -1,0 +1,59 @@
+.Profile {
+  display: flex;
+  width: 50%;
+  background: #ff7675;
+  flex-direction: column;
+  margin: 10px;
+  box-sizing: border-box;
+}
+
+.ProfileUpper {
+  display: flex;
+  border: 1px solid #dfe6e9;
+  box-shadow: 0 2px 3px #b2bec3;
+}
+
+.NameText {
+  color: #2d3436;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin: 5px;
+}
+
+.TitleText {
+  color: #ff7675;
+  font-weight: bold;
+  margin: 5px;
+}
+
+.TechText {
+  color: #2d3436;
+  margin: 5px;
+}
+
+.TextCard {
+  background: #dfe6e9;
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  padding: 10px;
+}
+
+.ProfileImg {
+  background-color: white;
+  padding: 5px;
+  box-sizing: border-box;
+  width: 40%;
+  object-fit: contain;
+  height: 140px;
+  background: #dfe6e9;
+}
+
+.Intro {
+  background: #dfe6e9;
+  width: 90%;
+  padding: 10px;
+  border: 1px solid #dfe6e9;
+  box-shadow: 0 2px 3px #b2bec3;
+  margin: 10px auto;
+}
