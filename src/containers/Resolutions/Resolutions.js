@@ -12,18 +12,12 @@ class Resolutions extends Component {
 
   state = {
     popUpResID: null,
-    popUpResTitle: null,
-    popUpResresValue: null,
-    popUpResresCost: null,
+    popUpRes: null,
     popUpResClicked: false,
-
-
   }
 
   componentDidMount = () => {
     this.props.onListinResources()
-    // console.log(this.state.resCost)
-    // console.log(this.state.resValue)
   }
 
   resMoreHandler = (resID) => {
