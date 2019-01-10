@@ -15,7 +15,9 @@ class Resolutions extends Component {
     popUpResID: null,
     popUpRes: null,
     popUpResClicked: false,
-    canBeAdded: true
+    canBeAdded: true,
+    canBeRemoved: true,
+    outRunnedRes: []
   }
 
   componentDidMount = () => {
@@ -40,26 +42,60 @@ class Resolutions extends Component {
     })
   }
 
+  errorClosedHandler = () => {
+    this.setState({
+      ...this.state,
+      canBeAdded: true
+    })
+  }
+
   resCanBeAddedHandler = (res, budgetObject) => {
 
     const actualBudget = this.props.actualRsrcs;
-    let canBeAddedActual = true
+
+    const outRunnedRes = []
 
     Object.keys(actualBudget).map(rscKey => {
-      if (actualBudget[rscKey] > budgetObject[rscKey] && canBeAddedActual) {
-        canBeAddedActual = true
-      } else {
-        canBeAddedActual = false
+      // console.log('BUMM', rscKey, actualBudget[rscKey], budgetObject[rscKey], actualBudget[rscKey] + budgetObject[rscKey])
+      if (actualBudget[rscKey] + budgetObject[rscKey] < 0) {
+        outRunnedRes.push(rscKey)
       }
     })
+    // console.log(outRunnedRes)
 
-    console.log(canBeAddedActual)
-    if (canBeAddedActual) {
+
+    if (outRunnedRes.length === 0) {
+      this.props.onAddResolution(res, budgetObject)
+    } else {
+      this.setState({
+        ...this.state,
+        canBeAdded: false,
+        outRunnedRes: outRunnedRes
+      })
+    }
+  }
+
+  resCanBeRemovedHandler = (res, budgetObject) => {
+
+    const actualBudget = this.props.actualRsrcs;
+    const outRunnedRes = []
+
+    Object.keys(actualBudget).map(rscKey => {
+      // console.log('BUMMO', rscKey, actualBudget[rscKey], budgetObject[rscKey], actualBudget[rscKey] - budgetObject[rscKey])
+      if (actualBudget[rscKey] - budgetObject[rscKey] < 0) {
+        outRunnedRes.push(rscKey)
+      }
+    })
+    // console.log(outRunnedRes)
+
+
+    if (outRunnedRes.length === 0) {
       this.props.onRemoveResolution(res, budgetObject)
     } else {
       this.setState({
         ...this.state,
-        canBeAdded: false
+        canBeRemoved: false,
+        outRunnedRes: outRunnedRes
       })
     }
   }
@@ -84,8 +120,9 @@ class Resolutions extends Component {
           key={res}
           resMore={() => this.resMoreHandler(res)}
           resAdd={() => this.resCanBeAddedHandler(res, budgetObject)}
-
-          resRemove={() => this.props.onRemoveResolution(res, budgetObject)}
+          // resAdd={() => this.props.onAddResolution(res, budgetObject)}
+          resRemove={() => this.resCanBeRemovedHandler(res, budgetObject)}
+          // resRemove={() => this.props.onRemoveResolution(res, budgetObject)}
           title={this.props.rsltns[res].title}
           resAdded={this.props.rsltns[res].resAdded}
           status={this.props.rsltns[res].resAdded ? 'Added' : 'NotAdded'}
@@ -102,7 +139,10 @@ class Resolutions extends Component {
       />)
     }
 
-    const errorMessage = <ErrorPopUp />
+    const errormsgtext = 'With this pick you are running out of ' + this.state.outRunnedRes.join(', ') + ' resources. You should consider prioritizing your resolutions'
+
+    const errorMessage = <ErrorPopUp
+      errormessage={errormsgtext} />
 
 
     return (<div className={classes.ResolContainer}>
@@ -112,7 +152,7 @@ class Resolutions extends Component {
       <Modal show={this.state.popUpResClicked} modalClosed={this.resClosedHandler}>
         {resolutioncard}
       </Modal>
-      <Modal show={!this.state.canBeAdded} modalClosed={this.resClosedHandler}>
+      <Modal show={!this.state.canBeAdded || !this.state.canBeRemoved} modalClosed={this.errorClosedHandler}>
         {errorMessage}
       </Modal>
     </div>)
