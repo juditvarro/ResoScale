@@ -3,5 +3,7 @@ export {
 } from './resources';
 export {
   fetchResolutionStart,
-  fetchResolutions
+  fetchResolutions,
+  addResolution,
+  removeResolution
 } from './resolutions';

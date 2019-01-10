@@ -22,8 +22,9 @@ class Resolutions extends Component {
 
   resMoreHandler = (resID) => {
     console.log('clickedMore', resID)
-    const selectedRes = this.props.rsltns.filter(res => res.id === resID)[0];
-    console.log(selectedRes)
+    const selectedRes = this.props.rsltns[resID];
+
+    // console.log(selectedRes)
     this.setState({
       popUpResID: resID,
       popUpRes: selectedRes,
@@ -35,6 +36,8 @@ class Resolutions extends Component {
 
   resAddRemoveHandler = (resID) => {
     console.log('clickedADDMORE', resID)
+
+
   }
 
   resClosedHandler = () => {
@@ -47,12 +50,14 @@ class Resolutions extends Component {
 
     if (!this.props.resloading) {
       // console.log(this.props.rsltns)
-      reslist = this.props.rsltns.map(res => {
+      reslist = Object.keys(this.props.rsltns).map(res => {
+        // console.log(this.props.rsltns[res].title)
+
         return (<Resolutionbox
-          key={res.id}
-          resMore={() => this.resMoreHandler(res.id)}
-          resAddRemove={() => this.resAddRemoveHandler(res.id)}
-          title={res.title}
+          key={res}
+          resMore={() => this.resMoreHandler(res)}
+          resAddRemove={() => this.props.onAddResolution(res)}
+          title={this.props.rsltns[res].title}
           state={res.resClicked} />)
       })
     }
@@ -90,6 +95,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onListinResources: () => dispatch(actions.fetchResolutions()),
+    onAddResolution: (resID) => dispatch(actions.addResolution(resID))
+
   }
 }
 

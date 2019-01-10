@@ -27,17 +27,28 @@ export const fetchResolutions = () => {
     axios.get('/resolutions.json')
       .then(response => {
         // console.log(response.data)
-        const fetchedResolutions = [];
+        // const fetchedResolutions = [];
+        const startingObject = {}
+        let finishingObject = {}
+
+
+        // const fetchedResolutions = {}
+
         for (let resKey in response.data) {
-          // console.log(resKey)
-          fetchedResolutions.push({
-            ...response.data[resKey],
-            id: resKey,
-            resClicked: null,
-          })
+          const fetchedResolution = Object.assign({}, startingObject, { id: resKey, ...response.data[resKey], resClicked: false, resAdded: false })
+          finishingObject[resKey] = fetchedResolution
+          // console.log(fetchedResolution)
+          // fetchedResolutions.push({
+          //   ...response.data[resKey],
+          //   id: resKey,
+          //   resClicked: false,
+          //   resAdded: false,
+          // })
         }
-        console.log(fetchedResolutions)
-        dispatch(fetchResolutionSuccess(fetchedResolutions))
+        // console.log('OBJFRM', fetchedResolutions)
+        // console.log('OBJ', moka)
+
+        dispatch(fetchResolutionSuccess(finishingObject))
       })
       .catch(error => {
         dispatch(fetchResolutionFailed(error))
@@ -45,17 +56,16 @@ export const fetchResolutions = () => {
   }
 }
 
-// export const addResolution = (resID) => {
-//   return {
-//     type: actionTypes.ADD_RESOLUTION,
-//     resolutionID: resID,
+export const addResolution = (resID) => {
+  return {
+    type: actionTypes.ADD_RESOLUTION,
+    resID: resID
+  }
+}
 
-//   }
-// }
-
-// export const removeResolution = (resID) => {
-//   return {
-//     type: actionTypes.REMOVE_RESOLUTION,
-//     resolutionID: resID,
-//   }
-// }
+export const removeResolution = (resID) => {
+  return {
+    type: actionTypes.REMOVE_RESOLUTION,
+    resID: resID,
+  }
+}
