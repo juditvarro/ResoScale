@@ -57,7 +57,9 @@ class Resolutions extends Component {
           resAdd={() => this.props.onAddResolution(res, budgetObject)}
           resRemove={() => this.props.onRemoveResolution(res, budgetObject)}
           title={this.props.rsltns[res].title}
-          resAdded={this.props.rsltns[res].resAdded} />)
+          resAdded={this.props.rsltns[res].resAdded}
+          status={this.props.rsltns[res].resAdded ? 'Added' : 'NotAdded'}
+        />)
       })
     }
 
