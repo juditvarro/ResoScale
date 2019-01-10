@@ -3,6 +3,8 @@ import * as actionTypes from '../actions/actionTypes'
 const initialState = {
   resources: null,
   error: false,
+  resloading: false,
+  resolutions: []
 
 };
 
@@ -19,6 +21,22 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         error: true
+      }
+    case actionTypes.FETCH_RESOLUTIONS_START:
+      return {
+        ...state,
+        resloading: true
+      }
+    case actionTypes.FETCH_RESOLUTIONS_SUCCESS:
+      return {
+        ...state,
+        resolutions: action.resolutions,
+        resloading: false
+      }
+    case actionTypes.FETCH_RESOLUTIONS_FAILED:
+      return {
+        ...state,
+        resloading: false
       }
     default:
       return state

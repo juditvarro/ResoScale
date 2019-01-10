@@ -1,0 +1,7 @@
+.ResolContainer {
+  background: #fad390;
+  width: 50%;
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: row wrap;
+}
