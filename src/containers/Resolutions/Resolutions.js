@@ -11,27 +11,13 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 class Resolutions extends Component {
 
   state = {
-    resClicked: false,
-    resText: '',
-    resCost: {
-      Energy: 2,
-      Freetime: 3,
-      Money: 1,
-      Brain: 4,
-      Health: 0,
-      Socialvalue: 2,
-      Willpower: 4
-    },
-    resValue: {
-      Energy: 4,
-      Freetime: 1,
-      Money: 2,
-      Brain: 5,
-      Health: 4,
-      Socialvalue: 1,
-      Willpower: 2,
-    },
-    title: "I will do more sport"
+    popUpResID: null,
+    popUpResTitle: null,
+    popUpResresValue: null,
+    popUpResresCost: null,
+    popUpResClicked: false,
+
+
   }
 
   componentDidMount = () => {
@@ -40,17 +26,27 @@ class Resolutions extends Component {
     // console.log(this.state.resValue)
   }
 
-  resClickedHandler = (event) => {
-    console.log('clicked', event.target)
+  resMoreHandler = (resID) => {
+    console.log('clickedMore', resID)
+    const selectedRes = this.props.rsltns.filter(res => res.id === resID)[0];
+    console.log(selectedRes)
     this.setState({
-      ...this.state,
-      resClicked: true,
-      // resText: event.target.innerText,
+      popUpResID: resID,
+      popUpResClicked: true,
+      popUpResTitle: selectedRes.title,
+      popUpResresValue: selectedRes.resourceAdd,
+      popUpResresCost: selectedRes.resourceCost
     })
+
+
+  }
+
+  resAddRemoveHandler = (resID) => {
+    console.log('clickedADDMORE', resID)
   }
 
   resClosedHandler = () => {
-    this.setState({ resClicked: false })
+    this.setState({ popUpResClicked: false })
   }
 
   render() {
@@ -58,26 +54,35 @@ class Resolutions extends Component {
     let reslist = <Spinner />;
 
     if (!this.props.resloading) {
-      console.log(this.props.rsltns)
+      // console.log(this.props.rsltns)
       reslist = this.props.rsltns.map(res => {
         return (<Resolutionbox
           key={res.id}
-          clicked={() => this.resClickedHandler(res.id)}
-          title={res.title} />)
+          resMore={() => this.resMoreHandler(res.id)}
+          resAddRemove={() => this.resAddRemoveHandler(res.id)}
+          title={res.title}
+          state={res.resClicked} />)
       })
     }
 
-    // const resolutioncard = (<Resolutioncard
-    //   resValue={this.state.resValue}
-    //   resCost={this.state.resCost}
-    //   title={this.state.resText} />)
+    // console.log(this.state.popUpResresValue)
+    let resolutioncard = null;
+    if (this.state.popUpResClicked) {
+      resolutioncard = (<Resolutioncard
+        resValue={this.state.popUpResresValue}
+        resCost={this.state.popUpResresValue}
+        title={this.state.popUpResTitle} />)
+      console.log(resolutioncard)
+    }
+
 
     return (<div className={classes.ResolContainer}>
+
       {reslist}
-      {/* <Resolutionbox clicked={this.resClickedHandler} title={this.state.title} /> */}
-      {/* <Modal show={this.state.resClicked} modalClosed={this.resClosedHandler}>
+
+      <Modal show={this.state.popUpResClicked} modalClosed={this.resClosedHandler}>
         {resolutioncard}
-      </Modal> */}
+      </Modal>
     </div>)
   }
 }

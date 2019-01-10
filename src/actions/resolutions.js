@@ -32,7 +32,8 @@ export const fetchResolutions = () => {
           // console.log(resKey)
           fetchedResolutions.push({
             ...response.data[resKey],
-            id: resKey
+            id: resKey,
+            resClicked: null,
           })
         }
         console.log(fetchedResolutions)
