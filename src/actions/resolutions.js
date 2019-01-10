@@ -64,9 +64,10 @@ export const addResolution = (resID, budgetObject) => {
   }
 }
 
-export const removeResolution = (resID) => {
+export const removeResolution = (resID, budgetObject) => {
   return {
     type: actionTypes.REMOVE_RESOLUTION,
     resID: resID,
+    budgetObject: budgetObject
   }
 }
