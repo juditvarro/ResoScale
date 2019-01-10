@@ -6,6 +6,7 @@ import classes from './Resolutions.css';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/index';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import ErrorPopUp from '../../components/UI/ErrorPopUp/ErrorPopUp'
 
 
 class Resolutions extends Component {
@@ -14,6 +15,7 @@ class Resolutions extends Component {
     popUpResID: null,
     popUpRes: null,
     popUpResClicked: false,
+    canBeAdded: true
   }
 
   componentDidMount = () => {
@@ -32,7 +34,34 @@ class Resolutions extends Component {
 
 
   resClosedHandler = () => {
-    this.setState({ popUpResClicked: false })
+    this.setState({
+      ...this.state,
+      popUpResClicked: false
+    })
+  }
+
+  resCanBeAddedHandler = (res, budgetObject) => {
+
+    const actualBudget = this.props.actualRsrcs;
+    let canBeAddedActual = true
+
+    Object.keys(actualBudget).map(rscKey => {
+      if (actualBudget[rscKey] > budgetObject[rscKey] && canBeAddedActual) {
+        canBeAddedActual = true
+      } else {
+        canBeAddedActual = false
+      }
+    })
+
+    console.log(canBeAddedActual)
+    if (canBeAddedActual) {
+      this.props.onRemoveResolution(res, budgetObject)
+    } else {
+      this.setState({
+        ...this.state,
+        canBeAdded: false
+      })
+    }
   }
 
   render() {
@@ -54,7 +83,8 @@ class Resolutions extends Component {
         return (<Resolutionbox
           key={res}
           resMore={() => this.resMoreHandler(res)}
-          resAdd={() => this.props.onAddResolution(res, budgetObject)}
+          resAdd={() => this.resCanBeAddedHandler(res, budgetObject)}
+
           resRemove={() => this.props.onRemoveResolution(res, budgetObject)}
           title={this.props.rsltns[res].title}
           resAdded={this.props.rsltns[res].resAdded}
@@ -72,6 +102,8 @@ class Resolutions extends Component {
       />)
     }
 
+    const errorMessage = <ErrorPopUp />
+
 
     return (<div className={classes.ResolContainer}>
 
@@ -80,6 +112,9 @@ class Resolutions extends Component {
       <Modal show={this.state.popUpResClicked} modalClosed={this.resClosedHandler}>
         {resolutioncard}
       </Modal>
+      <Modal show={!this.state.canBeAdded} modalClosed={this.resClosedHandler}>
+        {errorMessage}
+      </Modal>
     </div>)
   }
 }
@@ -87,7 +122,8 @@ class Resolutions extends Component {
 const mapStateToProps = state => {
   return {
     rsltns: state.resoScaleReducer.resolutions,
-    resloading: state.resoScaleReducer.resloading
+    resloading: state.resoScaleReducer.resloading,
+    actualRsrcs: state.resoScaleReducer.resources
   }
 }
 
