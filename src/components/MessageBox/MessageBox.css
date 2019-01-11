@@ -1,5 +1,6 @@
-.Resolutionbox {
+.MessageBox {
   width: 120px;
+  background: white;
   height: 120px;
   text-align: center;
   padding: 10px;
@@ -10,12 +11,8 @@
   font-size: 90%;
 }
 
-.NotAdded {
-  background: #dfe6e9;
-}
-
-.Added {
-  background: #00b894;
-  color: #dfe6e9;
-  font-weight: bold;
+@media (min-width: 600px) {
+  .MessageBox {
+    width: 400px;
+  }
 }

@@ -1,6 +1,6 @@
 .Resolutioncard {
   width: 100%;
-  background: #0a3d62;
+  background: #2d3436;
   height: 100%;
   text-align: center;
   padding: 10px;
@@ -35,23 +35,25 @@
 }
 
 .ResListItemHeaderPos {
-  background: #079992;
+  background: #00b894;
   color: white;
+  font-weight: bolder;
 }
 
 .ResListItemHeaderNeg {
-  background: #b71540;
+  background: #eb4d4b;
   color: white;
+  font-weight: bolder;
 }
 
 .ResValueNeg {
-  color: #b71540;
-  font-weight: bold;
+  color: #eb4d4b;
+  font-weight: bolder;
 }
 
 .ResValuePos {
-  color: #079992;
-  font-weight: bold;
+  color: #00b894;
+  font-weight: bolder;
 }
 
 @media (min-width: 600px) {
