@@ -35,7 +35,10 @@ export const fetchResolutions = () => {
         // const fetchedResolutions = {}
 
         for (let resKey in response.data) {
-          const fetchedResolution = Object.assign({}, startingObject, { id: resKey, ...response.data[resKey], resClicked: false, resAdded: false })
+          const fetchedResolution = Object.assign({}, 
+            startingObject, { id: resKey, ...response.data[resKey], 
+              resClicked: false, 
+              resAdded: false })
           finishingObject[resKey] = fetchedResolution
           // console.log(fetchedResolution)
           // fetchedResolutions.push({
@@ -57,7 +60,7 @@ export const fetchResolutions = () => {
 }
 
 export const addResolution = (resID, budgetObject) => {
-  
+
   return {
     type: actionTypes.ADD_RESOLUTION,
     resID: resID,
