@@ -52,7 +52,9 @@
 .Intro {
   background: #dfe6e9;
   width: 90%;
-  padding: 10px;
+  min-height: 180px;
+  height: auto;
+  padding: 15px;
   border: 1px solid #dfe6e9;
   box-shadow: 0 2px 3px #b2bec3;
   margin: 10px auto;

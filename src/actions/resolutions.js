@@ -26,27 +26,14 @@ export const fetchResolutions = () => {
     dispatch(fetchResolutionStart());
     axios.get('/resolutions.json')
       .then(response => {
-        // console.log(response.data)
-        // const fetchedResolutions = [];
+
         const startingObject = {}
         let finishingObject = {}
-
-
-        // const fetchedResolutions = {}
 
         for (let resKey in response.data) {
           const fetchedResolution = Object.assign({}, startingObject, { id: resKey, ...response.data[resKey], resClicked: false, resAdded: false })
           finishingObject[resKey] = fetchedResolution
-          // console.log(fetchedResolution)
-          // fetchedResolutions.push({
-          //   ...response.data[resKey],
-          //   id: resKey,
-          //   resClicked: false,
-          //   resAdded: false,
-          // })
         }
-        // console.log('OBJFRM', fetchedResolutions)
-        // console.log('OBJ', moka)
 
         dispatch(fetchResolutionSuccess(finishingObject))
       })
@@ -57,7 +44,7 @@ export const fetchResolutions = () => {
 }
 
 export const addResolution = (resID, budgetObject) => {
-  
+
   return {
     type: actionTypes.ADD_RESOLUTION,
     resID: resID,
