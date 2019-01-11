@@ -1,14 +1,18 @@
 .MessageBox {
-  width: 120px;
-  background: white;
+  width: 100%;
+  background: rgb(252, 241, 207);
   height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
   padding: 10px;
   padding-top: 10px;
   border: 1px solid #eee;
   box-shadow: 0 2px 3px #ccc;
   margin: 10px auto;
-  font-size: 90%;
+  padding: 10px auto;
+  font-size: 100%;
 }
 
 @media (min-width: 600px) {

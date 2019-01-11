@@ -19,7 +19,7 @@ const aboutUs = (props) => {
       <Profile
         name='Judit dr. Varró'
         title='junior software developer'
-        intro='10+ experience in the mobile and web development industry as a planner, pm and team leader. Looking for junior dev opportunities where I can combine my previous project experience with my new skills  (JavaScript, Node.js, React, Python). And the reason behind my career change?  Love of technology, motivation to understand implementation deeper, and be able to contribute in every level of a project.'
+        intro='In the last 6 years I worked as lawyer, and I have gained practice in team-work as well as handling the responsibility that comes with my profession. I decided to become a programmer because I would love to work in a field in which being able to improve is needed and expected. I love the creative side of it, knowing that even if a problem seems impossible, finding a new perspective or a different technique usually helps.'
         imgsrc={profileimgJV}
         tech='React, JS, Node.js, Express, MySQL'
       />
