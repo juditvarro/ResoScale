@@ -4,7 +4,9 @@ const initialState = {
   resources: null,
   error: false,
   resloading: false,
-  resolutions: {}
+  resolutions: {},
+  insloading: false,
+  inspirations: {}
 
 };
 
@@ -82,6 +84,23 @@ const reducer = (state = initialState, action) => {
           }
         },
       }
+    case actionTypes.FETCH_INSPIRATIONS_START:
+      return {
+        ...state,
+        insloading: true
+      }
+    case actionTypes.FETCH_INSPIRATIONS_SUCCESS:
+      return {
+        ...state,
+        inspirations: action.inspirations,
+        insloading: false
+      }
+    case actionTypes.FETCH_INSPIRATIONS_FAILED:
+      return {
+        ...state,
+        insloading: false
+      }
+
     default:
       return state
   }

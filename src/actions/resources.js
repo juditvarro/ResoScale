@@ -18,7 +18,7 @@ export const initResources = () => {
   return dispatch => {
     axios.get('/resources.json')
       .then(response => {
-        // console.log(response.data)
+
         dispatch(setResources(response.data))
       })
       .catch(error => {

@@ -56,12 +56,10 @@ class Resolutions extends Component {
     const outRunnedRes = []
 
     Object.keys(actualBudget).map(rscKey => {
-      // console.log('BUMM', rscKey, actualBudget[rscKey], budgetObject[rscKey], actualBudget[rscKey] + budgetObject[rscKey])
       if (actualBudget[rscKey] + budgetObject[rscKey] < 0) {
         outRunnedRes.push(rscKey)
       }
     })
-    // console.log(outRunnedRes)
 
 
     if (outRunnedRes.length === 0) {
@@ -81,12 +79,10 @@ class Resolutions extends Component {
     const outRunnedRes = []
 
     Object.keys(actualBudget).map(rscKey => {
-      // console.log('BUMMO', rscKey, actualBudget[rscKey], budgetObject[rscKey], actualBudget[rscKey] - budgetObject[rscKey])
       if (actualBudget[rscKey] - budgetObject[rscKey] < 0) {
         outRunnedRes.push(rscKey)
       }
     })
-    // console.log(outRunnedRes)
 
 
     if (outRunnedRes.length === 0) {
