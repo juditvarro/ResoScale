@@ -1,7 +1,7 @@
 .Profile {
   display: flex;
   width: 50%;
-  background: #ff7675;
+  background: #eb4d4b;
   flex-direction: column;
   margin: 10px;
   box-sizing: border-box;
@@ -21,7 +21,7 @@
 }
 
 .TitleText {
-  color: #ff7675;
+  color: #eb4d4b;
   font-weight: bold;
   margin: 5px;
 }
