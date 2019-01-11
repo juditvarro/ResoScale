@@ -24,6 +24,18 @@ class Resolutions extends Component {
 
   componentDidUpdate = () => {
     console.log('Comp DID UPDATE')
+
+    Object.keys(this.props.rsltns).map(res => {
+      let budgetObject = {}
+      const resPlus = this.props.rsltns[res].resourceAdd
+      const resMinus = this.props.rsltns[res].resourceCost
+
+      Object.keys(resPlus).map(rscKey =>
+        budgetObject[rscKey] = resPlus[rscKey] - resMinus[rscKey]
+      )
+      const actualBudget = this.props.actualRsrcs;
+      // this.props.onResBudgetCheck(res, budgetObject, actualBudget)
+    })
   }
 
   componentDidMount = () => {
@@ -57,6 +69,7 @@ class Resolutions extends Component {
   }
 
   resCanBeAddedHandler = (res, budgetObject) => {
+
 
     const actualBudget = this.props.actualRsrcs;
 
@@ -122,20 +135,24 @@ class Resolutions extends Component {
           budgetObject[rscKey] = resPlus[rscKey] - resMinus[rscKey]
         )
         const actualBudget = this.props.actualRsrcs;
-        const outRunnedRes2 = []
+        console.log(actualBudget)
+        // const outRunnedRes2 = []
 
-        Object.keys(actualBudget).map(rscKey => {
-          console.log(actualBudget[rscKey] - budgetObject[rscKey] < 0)
-          if (actualBudget[rscKey] + budgetObject[rscKey] < 1) {
-            outRunnedRes2.push(rscKey)
 
-          }
-        })
+        // Object.keys(actualBudget).map(rscKey => {
+        //   console.log(actualBudget[rscKey] - budgetObject[rscKey] < 0)
+        //   if (actualBudget[rscKey] + budgetObject[rscKey] < 1) {
+        //     outRunnedRes2.push(rscKey)
+
+        //   }
+        // })
 
         let status = 'NotAdded'
         if (this.props.rsltns[res].resAdded) {
           status = 'Added'
-        } else if (outRunnedRes2.length > 0) {
+        } else if (this.props.rsltns[res].resCritical) {
+          status = 'Critical'
+        } else if (this.props.rsltns[res].resCanBeAdded === false) {
           status = 'RunningOut'
         }
 
@@ -195,8 +212,10 @@ const mapDispatchToProps = dispatch => {
   return {
     onListinResources: () => dispatch(actions.fetchResolutions()),
     onAddResolution: (resID, budgetObject) => dispatch(actions.addResolution(resID, budgetObject)),
-    onRemoveResolution: (resID, budgetObject) => dispatch(actions.removeResolution(resID, budgetObject))
+    onRemoveResolution: (resID, budgetObject) => dispatch(actions.removeResolution(resID, budgetObject)),
+    onResBudgetCheck: (resID, budgetObject, actualObject) => dispatch(actions.resolutionBudgetFit(resID, budgetObject, actualObject))
   }
 }
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(Resolutions)

@@ -5,5 +5,6 @@ export {
   fetchResolutionStart,
   fetchResolutions,
   addResolution,
-  removeResolution
+  removeResolution,
+  resolutionBudgetFit
 } from './resolutions';

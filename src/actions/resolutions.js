@@ -35,10 +35,14 @@ export const fetchResolutions = () => {
         // const fetchedResolutions = {}
 
         for (let resKey in response.data) {
-          const fetchedResolution = Object.assign({}, 
-            startingObject, { id: resKey, ...response.data[resKey], 
-              resClicked: false, 
-              resAdded: false })
+          const fetchedResolution = Object.assign({},
+            startingObject, {
+              id: resKey, ...response.data[resKey],
+              resClicked: false,
+              resAdded: false,
+              resCanBeAdded: true,
+              resCritical: false
+            })
           finishingObject[resKey] = fetchedResolution
           // console.log(fetchedResolution)
           // fetchedResolutions.push({
@@ -74,4 +78,30 @@ export const removeResolution = (resID, budgetObject) => {
     resID: resID,
     budgetObject: budgetObject
   }
+}
+
+export const resolutionBudgetFit = (resID, budgetObject, actBudgetObj) => {
+
+  const criticalAmount = 3
+  const outRunnedResources = []
+  const criticalAmResources = []
+
+
+  Object.keys(actBudgetObj).map(rscKey => {
+    if (actBudgetObj[rscKey] + budgetObject[rscKey] < criticalAmount && actBudgetObj[rscKey] + budgetObject[rscKey] >= 0) {
+      criticalAmResources.push(rscKey)
+    } else if (actBudgetObj[rscKey] + budgetObject[rscKey] < 0) {
+      outRunnedResources.push(rscKey)
+    }
+  })
+  let resCanBeAdded = (outRunnedResources.length === 0)
+  let resCritical = (criticalAmResources.length > 0)
+
+  return {
+    type: actionTypes.RESOLUTION_BUDGETFIT,
+    resID: resID,
+    resCanBeAdded: resCanBeAdded,
+    resCritical: resCritical
+  }
+
 }

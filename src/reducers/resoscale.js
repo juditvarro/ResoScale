@@ -82,10 +82,25 @@ const reducer = (state = initialState, action) => {
           }
         },
       }
+    case actionTypes.RESOLUTION_BUDGETFIT:
+      return {
+        ...state,
+        resolutions: {
+          ...state.resolutions,
+          [action.resID]: {
+            ...state.resolutions[action.resID],
+            resCanBeAdded: action.resCanBeAdded,
+            resCritical: action.resCritical
+          }
+        }
+      }
     default:
       return state
   }
+
+
 }
+
 
 
 export default reducer
