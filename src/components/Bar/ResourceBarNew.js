@@ -4,10 +4,17 @@ import Spinner from '../UI/Spinner/Spinner';
 
 const BarGroup = props => {
   let barPadding = 2
-  let barColour = '#eb2f06'
   let widthScale = name => name * 10
   let width = widthScale(props.value)
   let yMid = props.barHeight * 0.5
+
+  let barColour = ''
+
+  if (props.value <= 5) {
+    barColour = '#eb4d4b'
+  } else {
+    barColour = '#00b894'
+  }
 
   return <g className={classes.bargroup}>
     <text className={classes.namelabel} x="-2" y={yMid} alignmentBaseline="middle" >{props.name}</text>
@@ -15,6 +22,7 @@ const BarGroup = props => {
     <text className={classes.valuelabel} x={width - 8} y={yMid} alignmentBaseline="middle" >{props.value}</text>
   </g>
 }
+
 
 const ResourceBarNew = ({ resources }) => {
   if (resources === null) {
