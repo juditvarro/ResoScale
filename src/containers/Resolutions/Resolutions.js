@@ -6,6 +6,7 @@ import classes from './Resolutions.css';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/index';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import ErrorPopUp from '../../components/UI/ErrorPopUp/ErrorPopUp'
 
 
 class Resolutions extends Component {
@@ -14,6 +15,9 @@ class Resolutions extends Component {
     popUpResID: null,
     popUpRes: null,
     popUpResClicked: false,
+    canBeAdded: true,
+    canBeRemoved: true,
+    outRunnedRes: []
   }
 
   componentDidMount = () => {
@@ -32,7 +36,68 @@ class Resolutions extends Component {
 
 
   resClosedHandler = () => {
-    this.setState({ popUpResClicked: false })
+    this.setState({
+      ...this.state,
+      popUpResClicked: false
+    })
+  }
+
+  errorClosedHandler = () => {
+    this.setState({
+      ...this.state,
+      canBeAdded: true
+    })
+  }
+
+  resCanBeAddedHandler = (res, budgetObject) => {
+
+    const actualBudget = this.props.actualRsrcs;
+
+    const outRunnedRes = []
+
+    Object.keys(actualBudget).map(rscKey => {
+      // console.log('BUMM', rscKey, actualBudget[rscKey], budgetObject[rscKey], actualBudget[rscKey] + budgetObject[rscKey])
+      if (actualBudget[rscKey] + budgetObject[rscKey] < 0) {
+        outRunnedRes.push(rscKey)
+      }
+    })
+    // console.log(outRunnedRes)
+
+
+    if (outRunnedRes.length === 0) {
+      this.props.onAddResolution(res, budgetObject)
+    } else {
+      this.setState({
+        ...this.state,
+        canBeAdded: false,
+        outRunnedRes: outRunnedRes
+      })
+    }
+  }
+
+  resCanBeRemovedHandler = (res, budgetObject) => {
+
+    const actualBudget = this.props.actualRsrcs;
+    const outRunnedRes = []
+
+    Object.keys(actualBudget).map(rscKey => {
+      // console.log('BUMMO', rscKey, actualBudget[rscKey], budgetObject[rscKey], actualBudget[rscKey] - budgetObject[rscKey])
+      if (actualBudget[rscKey] - budgetObject[rscKey] < 0) {
+        outRunnedRes.push(rscKey)
+      }
+    })
+    // console.log(outRunnedRes)
+
+
+    if (outRunnedRes.length === 0) {
+      this.props.onRemoveResolution(res, budgetObject)
+    } else {
+      this.setState({
+        ...this.state,
+        canBeRemoved: false,
+        outRunnedRes: outRunnedRes
+      })
+    }
   }
 
   render() {
@@ -54,10 +119,14 @@ class Resolutions extends Component {
         return (<Resolutionbox
           key={res}
           resMore={() => this.resMoreHandler(res)}
-          resAdd={() => this.props.onAddResolution(res, budgetObject)}
-          resRemove={() => this.props.onRemoveResolution(res, budgetObject)}
+          resAdd={() => this.resCanBeAddedHandler(res, budgetObject)}
+          // resAdd={() => this.props.onAddResolution(res, budgetObject)}
+          resRemove={() => this.resCanBeRemovedHandler(res, budgetObject)}
+          // resRemove={() => this.props.onRemoveResolution(res, budgetObject)}
           title={this.props.rsltns[res].title}
-          resAdded={this.props.rsltns[res].resAdded} />)
+          resAdded={this.props.rsltns[res].resAdded}
+          status={this.props.rsltns[res].resAdded ? 'Added' : 'NotAdded'}
+        />)
       })
     }
 
@@ -70,6 +139,11 @@ class Resolutions extends Component {
       />)
     }
 
+    const errormsgtext = 'With this pick you are running out of ' + this.state.outRunnedRes.join(', ') + ' resources. You should consider prioritizing your resolutions'
+
+    const errorMessage = <ErrorPopUp
+      errormessage={errormsgtext} />
+
 
     return (<div className={classes.ResolContainer}>
 
@@ -78,6 +152,9 @@ class Resolutions extends Component {
       <Modal show={this.state.popUpResClicked} modalClosed={this.resClosedHandler}>
         {resolutioncard}
       </Modal>
+      <Modal show={!this.state.canBeAdded || !this.state.canBeRemoved} modalClosed={this.errorClosedHandler}>
+        {errorMessage}
+      </Modal>
     </div>)
   }
 }
@@ -85,7 +162,8 @@ class Resolutions extends Component {
 const mapStateToProps = state => {
   return {
     rsltns: state.resoScaleReducer.resolutions,
-    resloading: state.resoScaleReducer.resloading
+    resloading: state.resoScaleReducer.resloading,
+    actualRsrcs: state.resoScaleReducer.resources
   }
 }
 

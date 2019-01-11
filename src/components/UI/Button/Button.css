@@ -13,17 +13,16 @@
   margin: 5px;
   font-weight: bold;
   border-radius: 5px;
+  border: 2px solid #eeeeee;
 }
 
 .Success {
   /* color: #5C9210; */
   background-color: #0a3d62;
-  border: 1px solid #60a3bc;
 }
 
 .Danger {
   background-color: #b71540;
-  border: 1px solid#e55039;
   /* color: #944317; */
 }
 

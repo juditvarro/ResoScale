@@ -5,7 +5,8 @@ import Button from '../../UI/Button/Button'
 const resolutionbox = (props) => {
 
 
-  return (<div className={classes.Resolutionbox}>
+  return (<div
+    className={[classes.Resolutionbox, classes[props.status]].join(' ')}>
     <p style={{
       height: '40%'
     }}>{props.title}</p>
@@ -15,7 +16,13 @@ const resolutionbox = (props) => {
       height: '20%'
     }}>
       <Button btnType='Success' clicked={props.resMore}>DETAILS</Button>
-      {!props.resAdded ? <Button btnType='Success' clicked={props.resAdd} state={props.resAdded}>ADD</Button> : <Button btnType='Success' clicked={props.resRemove} state={props.resAdded}>REMOVE</Button>
+      {!props.resAdded ?
+        <Button btnType='Success'
+          clicked={props.resAdd}
+          state={props.resAdded}>ADD</Button> :
+        <Button btnType='Danger'
+          clicked={props.resRemove}
+          state={props.resAdded}>REMOVE</Button>
 
       }
 
