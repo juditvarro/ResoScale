@@ -20,8 +20,15 @@ class Resolutions extends Component {
     outRunnedRes: []
   }
 
+
+
+  componentDidUpdate = () => {
+    console.log('Comp DID UPDATE')
+  }
+
   componentDidMount = () => {
     this.props.onListinResources()
+    console.log('Comp DID MOUNT')
   }
 
   resMoreHandler = (resID) => {
@@ -114,7 +121,23 @@ class Resolutions extends Component {
         Object.keys(resPlus).map(rscKey =>
           budgetObject[rscKey] = resPlus[rscKey] - resMinus[rscKey]
         )
+        const actualBudget = this.props.actualRsrcs;
+        const outRunnedRes2 = []
 
+        Object.keys(actualBudget).map(rscKey => {
+          console.log(actualBudget[rscKey] - budgetObject[rscKey] < 0)
+          if (actualBudget[rscKey] + budgetObject[rscKey] < 1) {
+            outRunnedRes2.push(rscKey)
+
+          }
+        })
+
+        let status = 'NotAdded'
+        if (this.props.rsltns[res].resAdded) {
+          status = 'Added'
+        } else if (outRunnedRes2.length > 0) {
+          status = 'RunningOut'
+        }
 
         return (<Resolutionbox
           key={res}
@@ -125,7 +148,8 @@ class Resolutions extends Component {
           // resRemove={() => this.props.onRemoveResolution(res, budgetObject)}
           title={this.props.rsltns[res].title}
           resAdded={this.props.rsltns[res].resAdded}
-          status={this.props.rsltns[res].resAdded ? 'Added' : 'NotAdded'}
+          status={status}
+        // status={this.props.rsltns[res].resAdded ? 'Added' : 'NotAdded'}
         />)
       })
     }

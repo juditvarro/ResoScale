@@ -54,6 +54,8 @@
   font-weight: bold;
 }
 
+
+
 @media (min-width: 600px) {
   .Resolutioncard {
     width: 400px;
