@@ -10,6 +10,10 @@
   font-size: 90%;
 }
 
+.Flipped {
+  background: yellow;
+}
+
 .NotAdded {
   background: #dfe6e9;
 }

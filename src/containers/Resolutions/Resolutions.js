@@ -1,20 +1,15 @@
 import React, { Component } from 'react';
-import Resolutionbox from '../../components/Resolution/Resolutionbox/Resolutionbox';
-import Resolutioncard from '../../components/Resolution/Resolutioncard/Resolutioncard';
 import Modal from '../../components/UI/Modal/Modal';
 import classes from './Resolutions.css';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/index';
 import Spinner from '../../components/UI/Spinner/Spinner';
-import ErrorPopUp from '../../components/UI/ErrorPopUp/ErrorPopUp'
-
+import ErrorPopUp from '../../components/UI/ErrorPopUp/ErrorPopUp';
+import ResolutionCard from '../../components/ResolutionCard/ResolutionCard'
 
 class Resolutions extends Component {
 
   state = {
-    popUpResID: null,
-    popUpRes: null,
-    popUpResClicked: false,
     canBeAdded: true,
     canBeRemoved: true,
     outRunnedRes: []
@@ -24,23 +19,6 @@ class Resolutions extends Component {
     this.props.onListinResources()
   }
 
-  resMoreHandler = (resID) => {
-    const selectedRes = this.props.rsltns[resID];
-
-    this.setState({
-      popUpResID: resID,
-      popUpRes: selectedRes,
-      popUpResClicked: true,
-    })
-  }
-
-
-  resClosedHandler = () => {
-    this.setState({
-      ...this.state,
-      popUpResClicked: false
-    })
-  }
 
   errorClosedHandler = () => {
     this.setState({
@@ -104,35 +82,25 @@ class Resolutions extends Component {
 
       reslist = Object.keys(this.props.rsltns).map(res => {
         let budgetObject = {}
-        const resPlus = this.props.rsltns[res].resourceAdd
-        const resMinus = this.props.rsltns[res].resourceCost
+        const resBudget = this.props.rsltns[res].resourceContribution
 
-        Object.keys(resPlus).map(rscKey =>
-          budgetObject[rscKey] = resPlus[rscKey] - resMinus[rscKey]
+        Object.keys(resBudget).map(rscKey =>
+          budgetObject[rscKey] = resBudget[rscKey]
         )
 
+        return (
 
-        return (<Resolutionbox
-          key={res}
-          resMore={() => this.resMoreHandler(res)}
-          resAdd={() => this.resCanBeAddedHandler(res, budgetObject)}
-          // resAdd={() => this.props.onAddResolution(res, budgetObject)}
-          resRemove={() => this.resCanBeRemovedHandler(res, budgetObject)}
-          // resRemove={() => this.props.onRemoveResolution(res, budgetObject)}
-          title={this.props.rsltns[res].title}
-          resAdded={this.props.rsltns[res].resAdded}
-          status={this.props.rsltns[res].resAdded ? 'Added' : 'NotAdded'}
-        />)
+          <ResolutionCard
+            key={res}
+            resMore={() => this.resMoreHandler(res)}
+            resAdd={() => this.resCanBeAddedHandler(res, budgetObject)}
+            resRemove={() => this.resCanBeRemovedHandler(res, budgetObject)}
+            title={this.props.rsltns[res].title}
+            resAdded={this.props.rsltns[res].resAdded}
+            status={this.props.rsltns[res].resAdded ? 'Added' : 'NotAdded'}
+            resBudget={resBudget}
+          />)
       })
-    }
-
-    let resolutioncard = null;
-    if (this.state.popUpResClicked) {
-      resolutioncard = (<Resolutioncard
-        resValue={this.state.popUpRes.resourceAdd}
-        resCost={this.state.popUpRes.resourceCost}
-        title={this.state.popUpRes.title}
-      />)
     }
 
     const errormsgtext = 'With this pick you are running out of ' + this.state.outRunnedRes.join(', ') + ' resources. You should consider prioritizing your resolutions'
@@ -145,9 +113,6 @@ class Resolutions extends Component {
 
       {reslist}
 
-      <Modal show={this.state.popUpResClicked} modalClosed={this.resClosedHandler}>
-        {resolutioncard}
-      </Modal>
       <Modal show={!this.state.canBeAdded || !this.state.canBeRemoved} modalClosed={this.errorClosedHandler}>
         {errorMessage}
       </Modal>

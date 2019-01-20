@@ -1,0 +1,21 @@
+.ResCardFront {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #eee;
+  box-shadow: 0 2px 3px #ccc;
+  margin: auto;
+  font-size: 90%;
+}
+
+.NotAdded {
+  background: #dfe6e9;
+}
+
+.Added {
+  background: #00b894;
+  color: #dfe6e9;
+  font-weight: bold;
+}

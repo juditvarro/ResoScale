@@ -1,5 +1,5 @@
 import * as actionTypes from '../actions/actionTypes';
-// import { createReducer } from 'redux-create-reducer';
+import { createReducer } from 'redux-create-reducer';
 import { updateObject } from '../utils/utility'
 
 const initialState = {
@@ -82,25 +82,36 @@ const fetchInspirationFailed = (state, action) => updateObject(state, { insloadi
 
 
 // REDUCER SWITCH
-const reducer = (state = initialState, action) => {
+// const reducer = (state = initialState, action) => {
+//   switch (action.type) {
+//     case actionTypes.SET_RESOURCES: return setResources(state, action)
+//     case actionTypes.FETCH_RESOURCES_FAILED: return fetchResourcesFailed(state, action)
+//     case actionTypes.FETCH_RESOLUTIONS_START: return fetchResolutionStart(state, action)
+//     case actionTypes.FETCH_RESOLUTIONS_SUCCESS: return fetchResolutionSuccess(state, action)
+//     case actionTypes.FETCH_RESOLUTIONS_FAILED: return fetchResolutionFailed(state, action)
+//     case actionTypes.ADD_RESOLUTION: return addResolution(state, action)
+//     case actionTypes.REMOVE_RESOLUTION: return removeResolution(state, action)
+//     case actionTypes.FETCH_INSPIRATIONS_START: return fetchInspirationStart(state, action)
+//     case actionTypes.FETCH_INSPIRATIONS_SUCCESS: return fetchInspirationSuccess(state, action)
+//     case actionTypes.FETCH_INSPIRATIONS_FAILED: return fetchInspirationFailed(state, action)
 
+//     default:
+//       return state
+//   }
+// }
 
-  switch (action.type) {
-    case actionTypes.SET_RESOURCES: return setResources(state, action)
-    case actionTypes.FETCH_RESOURCES_FAILED: return fetchResourcesFailed(state, action)
-    case actionTypes.FETCH_RESOLUTIONS_START: return fetchResolutionStart(state, action)
-    case actionTypes.FETCH_RESOLUTIONS_SUCCESS: return fetchResolutionSuccess(state, action)
-    case actionTypes.FETCH_RESOLUTIONS_FAILED: return fetchResolutionFailed(state, action)
-    case actionTypes.ADD_RESOLUTION: return addResolution(state, action)
-    case actionTypes.REMOVE_RESOLUTION: return removeResolution(state, action)
-    case actionTypes.FETCH_INSPIRATIONS_START: return fetchInspirationStart(state, action)
-    case actionTypes.FETCH_INSPIRATIONS_SUCCESS: return fetchInspirationSuccess(state, action)
-    case actionTypes.FETCH_INSPIRATIONS_FAILED: return fetchInspirationFailed(state, action)
-
-    default:
-      return state
-  }
-}
+const reducer = createReducer(initialState, {
+  SET_RESOURCES: setResources,
+  FETCH_RESOURCES_FAILED: fetchResourcesFailed,
+  FETCH_RESOLUTIONS_START: fetchResolutionStart,
+  FETCH_RESOLUTIONS_SUCCESS: fetchResolutionSuccess,
+  FETCH_RESOLUTIONS_FAILED: fetchResolutionFailed,
+  ADD_RESOLUTION: addResolution,
+  REMOVE_RESOLUTION: removeResolution,
+  FETCH_INSPIRATIONS_START: fetchInspirationStart,
+  FETCH_INSPIRATIONS_SUCCESS: fetchInspirationSuccess,
+  FETCH_INSPIRATIONS_FAILED: fetchInspirationFailed,
+})
 
 
 export default reducer
