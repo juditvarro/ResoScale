@@ -13,13 +13,13 @@ const iconExplain = (props) => {
 
     <ul className={classes.Iconlist}>
       <div className={classes.SectionLabel}> RESOURCE ICONS</div>
-      <li className={classes.IconlistItem}><img src={brainicon}></img><div>Brain</div></li>
-      <li className={classes.IconlistItem}><img src={energyicon}></img><div>Energy</div></li>
-      <li className={classes.IconlistItem}><img src={freetimeicon}></img><div>Freetime</div></li>
-      <li className={classes.IconlistItem}><img src={healthicon}></img><div>Health</div></li>
-      <li className={classes.IconlistItem}><img src={moneyicon}></img><div>Money</div></li>
-      <li className={classes.IconlistItem}><img src={socialvalueicon}></img><div>Social value</div></li>
-      <li className={classes.IconlistItem}><img src={willpowericon}></img><div>Willpower</div></li>
+      <li className={classes.IconlistItem}><img src={brainicon} alt='Brain capacity'></img><div>Brain</div></li>
+      <li className={classes.IconlistItem}><img src={energyicon} alt='Energy level'></img><div>Energy</div></li>
+      <li className={classes.IconlistItem}><img src={freetimeicon} alt='Available freetime'></img><div>Freetime</div></li>
+      <li className={classes.IconlistItem}><img src={healthicon} alt='Health level'></img><div>Health</div></li>
+      <li className={classes.IconlistItem}><img src={moneyicon} alt='Financial resources'></img><div>Money</div></li>
+      <li className={classes.IconlistItem}><img src={socialvalueicon} alt='Social connectedness'></img><div>Social value</div></li>
+      <li className={classes.IconlistItem}><img src={willpowericon} alt='Willpower level'></img><div>Willpower</div></li>
     </ul>
 
   </div>)

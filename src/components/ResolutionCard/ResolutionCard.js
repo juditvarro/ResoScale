@@ -6,19 +6,19 @@ import classes from './ResolutionCard.css';
 
 class ResolutionCardContainer extends Component {
   state = {
-    isFlipped: false
+    isflipped: false
   }
 
   handleClick = () => {
     console.log('i was clicked')
-    this.setState(prevState => { return { isFlipped: !prevState.isFlipped } });
+    this.setState(prevState => { return { isflipped: !prevState.isflipped } });
   }
 
 
   render() {
     return (
       <div className={classes.FlipContainer}>
-        <div className={this.state.isFlipped ? classes.ReactCardFlipped : classes.ReactCardFlipper} isFlipped={this.state.isFlipped}>
+        <div className={this.state.isflipped ? classes.ReactCardFlipped : classes.ReactCardFlipper}>
           <div className={classes.ReactCardFront} key="front">
             <ResCardFront
               title={this.props.title}
@@ -41,7 +41,7 @@ class ResolutionCardContainer extends Component {
             />
           </div>
         </div>
-      </div>
+      </div >
 
     )
 
