@@ -10,7 +10,9 @@ import willpowericon from './../../../assets/resicons/willpower.svg';
 
 const iconExplain = (props) => {
   return (<div className={classes.IconExplainContainer}>
+
     <ul className={classes.Iconlist}>
+      <div className={classes.SectionLabel}> RESOURCE ICONS</div>
       <li className={classes.IconlistItem}><img src={brainicon}></img><div>Brain</div></li>
       <li className={classes.IconlistItem}><img src={energyicon}></img><div>Energy</div></li>
       <li className={classes.IconlistItem}><img src={freetimeicon}></img><div>Freetime</div></li>

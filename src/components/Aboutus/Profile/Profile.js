@@ -12,6 +12,7 @@ const profile = props => {
       </div>
     </div>
     <div className={classes.Intro}>{props.intro}</div>
+    
   </div>)
 }
 
