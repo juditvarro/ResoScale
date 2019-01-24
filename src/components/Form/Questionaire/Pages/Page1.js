@@ -8,29 +8,29 @@ const page1 = ({ values, errors, touched }) => {
   return <>
 
     <RadioButtonGroup
-      id="radioGroup1"
+      id="brain"
       label="How quickly can your brain absorbe new knowledge"
-      value={values.radioGroup1}
-      error={errors.radioGroup1}
-      touched={touched.radioGroup1}
+      value={values.brain}
+      error={errors.brain}
+      touched={touched.brain}
       title="Brain capacity"
       icon={brainicon}
     >
       <Field
         component={RadioButton}
-        name="radioGroup1"
+        name="brain"
         id="RQ1A1"
         label="Give me a month and I can learn a new language on a basic level"
       />
       <Field
         component={RadioButton}
-        name="radioGroup1"
+        name="brain"
         id="RQ1A2"
         label="I can do maximum two things in paralel"
       />
       <Field
         component={RadioButton}
-        name="radioGroup1"
+        name="brain"
         id="RQ1A3"
         label="I was happy when I finally finished my shools"
       />

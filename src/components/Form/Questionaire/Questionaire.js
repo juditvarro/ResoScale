@@ -9,7 +9,8 @@ import Page5 from './Pages/Page5';
 import Page6 from './Pages/Page6';
 import Page7 from './Pages/Page7';
 import classes from './Questionaire.css';
-import Button from '../../UI/Button/Button'
+// import Button from '../../UI/Button/Button'
+import questEvaluation from '../../../assets/questionaireKey'
 
 class Questionaire extends Component {
 
@@ -18,8 +19,6 @@ class Questionaire extends Component {
   }
 
   pagenateHandler = () => {
-    console.log(this.state.page)
-    console.log(this.state.page === 6)
     this.setState(state => ({
       page: state.page + 1
     }));
@@ -33,23 +32,23 @@ class Questionaire extends Component {
         <div className={classes.QuestTitle}>Tell us a couple of things about yourself to personalize the experience!</div>
         <Formik
           initialValues={{
-            radioGroup1: "",
-            radioGroup2: "",
-            radioGroup3: "",
-            radioGroup4: "",
-            radioGroup5: "",
-            radioGroup6: "",
-            radioGroup7: "",
+            brain: "",
+            energy: "",
+            freetime: "",
+            health: "",
+            money: "",
+            socialvalue: "",
+            willpower: "",
 
           }}
           validationSchema={Yup.object().shape({
-            radioGroup1: Yup.string().required("Please pick one answer"),
-            radioGroup2: Yup.string().required("Please pick one answer"),
-            radioGroup3: Yup.string().required("Please pick one answer"),
-            radioGroup4: Yup.string().required("Please pick one answer"),
-            radioGroup5: Yup.string().required("Please pick one answer"),
-            radioGroup6: Yup.string().required("Please pick one answer"),
-            radioGroup7: Yup.string().required("Please pick one answer"),
+            brain: Yup.string().required("Please pick one answer"),
+            energy: Yup.string().required("Please pick one answer"),
+            freetime: Yup.string().required("Please pick one answer"),
+            health: Yup.string().required("Please pick one answer"),
+            money: Yup.string().required("Please pick one answer"),
+            socialvalue: Yup.string().required("Please pick one answer"),
+            willpower: Yup.string().required("Please pick one answer"),
 
           })}
           onSubmit={(values, actions) => {
@@ -57,8 +56,10 @@ class Questionaire extends Component {
               ...values,
               date: Date.now()
             }
-            console.log(results)
-            console.log(JSON.stringify(values, null, 2));
+
+            const evaluatedresults = questEvaluation(results)
+            console.log('EVALUATION', evaluatedresults)
+            console.log(JSON.stringify(evaluatedresults, null, 2));
             actions.setSubmitting(false);
           }}
 

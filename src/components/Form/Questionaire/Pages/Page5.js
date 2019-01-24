@@ -8,29 +8,29 @@ const page5 = ({ values, errors, touched }) => {
   return <>
 
     <RadioButtonGroup
-      id="radioGroup5"
+      id="money"
       label="How are you on the money field?"
-      value={values.radioGroup5}
-      error={errors.radioGroup5}
-      touched={touched.radioGroup5}
+      value={values.money}
+      error={errors.money}
+      touched={touched.money}
       title="Financial resources "
       icon={moneyicon}
     >
       <Field
         component={RadioButton}
-        name="radioGroup5"
+        name="money"
         id="RQ5A1"
         label="I can hardly survive and ensure the minimum stuff"
       />
       <Field
         component={RadioButton}
-        name="radioGroup5"
+        name="money"
         id="RQ5A2"
         label="I am not a millionaire but I have some extra during the month"
       />
       <Field
         component={RadioButton}
-        name="radioGroup5"
+        name="money"
         id="RQ5A3"
         label="Money is not an issue for me"
       />
