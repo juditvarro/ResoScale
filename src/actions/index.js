@@ -1,5 +1,6 @@
 export {
   initResources,
+  setResources
 } from './resources';
 export {
   fetchResolutions,

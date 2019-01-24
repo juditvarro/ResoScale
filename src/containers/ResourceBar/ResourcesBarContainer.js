@@ -5,8 +5,8 @@ import ResourceBarNew from '../../components/Bar/ResourceBarNew'
 const mapStateToProps = state => state.resoScaleReducer;
 
 const mapDispatchToProps = dispatch => ({
-    onInitResources: dispatch(actions.initResources()),
-  })
+  // onInitResources: dispatch(actions.initResources()),
+})
 
 const ResourceBarContainer = connect(
   mapStateToProps,

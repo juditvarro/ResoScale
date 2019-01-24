@@ -32,7 +32,7 @@ const page1 = ({ values, errors, touched }) => {
         component={RadioButton}
         name="brain"
         id="RQ1A3"
-        label="I was happy when I finally finished my shools"
+        label="I was happy when I finally finished my schools"
       />
 
     </RadioButtonGroup>

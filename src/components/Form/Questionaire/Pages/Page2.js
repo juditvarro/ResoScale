@@ -26,13 +26,14 @@ const page2 = ({ values, errors, touched }) => {
         component={RadioButton}
         name="energy"
         id="RQ2A2"
-        label="I can put myself to things but then I need some recharging period?"
+        label="I am usually tired already after lunchtime."
       />
       <Field
         component={RadioButton}
         name="energy"
         id="RQ2A3"
-        label="I am usually tired already after lunchtime."
+        label="I can put myself to things but then I need some recharging period?"
+
       />
     </RadioButtonGroup>
   </>)

@@ -40,3 +40,42 @@
 .container .bargroup:hover .valuelabel {
   font-size: 0.8em;
 }
+
+.FormPromo {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 80%;
+  height: auto;
+  padding: 10px;
+  margin: 20px auto;
+  border: 1px solid #eee;
+  box-shadow: 0 2px 3px #ccc;
+  font-size: 90%;
+  background: #00b894;
+}
+
+.FormPromoText {
+  margin: 20px auto;
+  color: #fff;
+}
+
+.FormPromoImg {
+  width: 100%
+}
+
+.FormPromoBtn {
+  color: white;
+  width: 25%;
+  height: 40px;
+  font-size: 80%;
+  text-align: center;
+  outline: none;
+  cursor: pointer;
+  padding: 5px;
+  margin: 5px auto;
+  font-weight: bold;
+  border-radius: 5px;
+  border: 2px solid #eeeeee;
+  background-color: #eb4d4b;
+}
