@@ -7,11 +7,28 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 40%;
+  width: 45%;
 }
 
 .ResWrapper {
   display: flex;
   flex-direction: column;
-  width: 60%;
+  width: 55%;
+}
+
+@media screen and (max-width: 768px) {
+  .ResScale {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+  }
+  .BoxNBar {
+    width: 90%;
+    order: 1;
+  }
+  .ResWrapper {
+    width: 100%;
+    order: 100;
+  }
 }

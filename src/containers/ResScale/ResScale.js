@@ -12,8 +12,6 @@ const resScale = props => {
       <Resolutions />
     </div>
 
-
-
     <div className={classes.BoxNBar}>
       <MessageBoxContainer className={classes.Box} />
       <ResourceBarContainer />

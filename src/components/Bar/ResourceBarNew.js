@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import classes from './ResourceBarNew.css';
-import Spinner from '../UI/Spinner/Spinner';
-import Button from '../UI/Button/Button';
-import { Redirect } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import ResourceImage from '../../assets/ResourceImage.png'
 
@@ -44,7 +41,7 @@ class ResourceBarNew extends Component {
       return (<div className={classes.FormPromo}>
         <div className={classes.FormPromoText}>In order to customize the experience based on your personal traits please answer a couple of questions to set the Resource budget</div>
         <button className={classes.FormPromoBtn} onClick={this.setRedirect}>FILL THE FORM</button>
-        <div><img className={classes.FormPromoImg} src={ResourceImage} alt='Example'></img></div>
+        {/* <div><img className={classes.FormPromoImg} src={ResourceImage} alt='Example'></img></div> */}
       </div >)
 
     }

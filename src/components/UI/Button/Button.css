@@ -28,5 +28,6 @@
 
 .Button:disabled {
   color: #eeeeee;
+  background: #ced6e0;
   cursor: not-allowed;
 }

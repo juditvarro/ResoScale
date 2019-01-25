@@ -36,7 +36,11 @@ const resCardBack = (props) => {
     <div className={classes.ResResource}>
       {resBudget}
     </div>
-    <ResCardButton resAdd={props.resAdd} resAdded={props.resAdded} resRemove={props.resRemove} />
+    <ResCardButton
+      resAdd={props.resAdd}
+      resAdded={props.resAdded}
+      resRemove={props.resRemove}
+      disabled={props.disabled} />
   </div >);
 }
 

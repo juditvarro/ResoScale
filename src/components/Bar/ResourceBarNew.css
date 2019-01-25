@@ -3,7 +3,8 @@
   font-size: 18px;
   margin-left: 3%;
   font-weight: bolder;
-  width: 50%;
+  width: 90%;
+  display: flex;
 }
 
 .bargroup .namelabel {

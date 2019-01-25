@@ -13,8 +13,8 @@
   font-size: 100%;
 }
 
-/* @media (min-width: 600px) {
+@media screen and (max-width: 768px) {
   .MessageBox {
-    width: 80%;
+    display: none;
   }
-} */
+}

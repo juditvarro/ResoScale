@@ -12,11 +12,12 @@ class Resolutions extends Component {
   state = {
     canBeAdded: true,
     canBeRemoved: true,
-    outRunnedRes: []
+    outRunnedRes: [],
   }
 
   componentDidMount = () => {
-    this.props.onListinResources()
+    // this.props.onListingResolutions()
+    this.props.onListingResolutionFromStore(this.props.rsltns)
   }
 
 
@@ -31,13 +32,7 @@ class Resolutions extends Component {
 
     const actualBudget = this.props.actualRsrcs;
 
-    const outRunnedRes = []
-
-    Object.keys(actualBudget).map(rscKey => {
-      if (actualBudget[rscKey] + budgetObject[rscKey] < 0) {
-        outRunnedRes.push(rscKey)
-      }
-    })
+    const outRunnedRes = Object.keys(actualBudget).filter(rscKey => actualBudget[rscKey] + budgetObject[rscKey] < 0)
 
 
     if (outRunnedRes.length === 0) {
@@ -54,13 +49,7 @@ class Resolutions extends Component {
   resCanBeRemovedHandler = (res, budgetObject) => {
 
     const actualBudget = this.props.actualRsrcs;
-    const outRunnedRes = []
-
-    Object.keys(actualBudget).map(rscKey => {
-      if (actualBudget[rscKey] - budgetObject[rscKey] < 0) {
-        outRunnedRes.push(rscKey)
-      }
-    })
+    const outRunnedRes = Object.keys(actualBudget).filter(rscKey => actualBudget[rscKey] - budgetObject[rscKey] < 0)
 
 
     if (outRunnedRes.length === 0) {
@@ -99,6 +88,7 @@ class Resolutions extends Component {
             resAdded={this.props.rsltns[res].resAdded}
             status={this.props.rsltns[res].resAdded ? 'Added' : 'NotAdded'}
             resBudget={resBudget}
+            disabled={!this.props.actualRsrcs}
           />)
       })
     }
@@ -130,7 +120,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onListinResources: () => dispatch(actions.fetchResolutions()),
+    onListingResolutions: () => dispatch(actions.fetchResolutions()),
+    onListingResolutionFromStore: (resolutions) => dispatch(actions.fetchResolutionSuccess(resolutions)),
     onAddResolution: (resID, budgetObject) => dispatch(actions.addResolution(resID, budgetObject)),
     onRemoveResolution: (resID, budgetObject) => dispatch(actions.removeResolution(resID, budgetObject))
   }

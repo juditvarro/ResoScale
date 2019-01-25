@@ -17,11 +17,10 @@ class MessageBoxContainer extends Component {
     if (!this.props.insloading) {
       let randomIndex = Math.ceil(Math.random() * 6)
 
-      Object.keys(this.props.inspirations).filter(insKey => {
-        if (insKey === `MSG00${randomIndex}`) {
-          text = this.props.inspirations[insKey].text
-        }
-      })
+      text = Object.keys(this.props.inspirations).filter(insKey => insKey === `MSG00${randomIndex}`)
+        .map(key => {
+          return this.props.inspirations[key].text
+        })
 
       inspirationList = (<MessageBox text={text} />)
     }

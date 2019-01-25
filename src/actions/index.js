@@ -4,6 +4,7 @@ export {
 } from './resources';
 export {
   fetchResolutions,
+  fetchResolutionSuccess,
   addResolution,
   removeResolution
 } from './resolutions';

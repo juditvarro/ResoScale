@@ -7,10 +7,13 @@ const resCardButton = (props) => {
     {!props.resAdded ?
       <Button btnType='Success'
         clicked={props.resAdd}
-        state={props.resAdded}>ADD</Button> :
+        state={props.resAdded}
+        disabled={props.disabled}>ADD</Button> :
       <Button btnType='Danger'
         clicked={props.resRemove}
-        state={props.resAdded}>REMOVE</Button>
+        state={props.resAdded}
+        disabled={props.disabled}
+      >REMOVE</Button>
     }
   </div>)
 }

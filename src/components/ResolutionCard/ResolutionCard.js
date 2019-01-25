@@ -27,6 +27,7 @@ class ResolutionCardContainer extends Component {
               resAdded={this.props.resAdded}
               resRemove={this.props.resRemove}
               status={this.props.status}
+              disabled={this.props.disabled}
             />
           </div>
           <div className={classes.ReactCardBack} key="back">
@@ -38,6 +39,7 @@ class ResolutionCardContainer extends Component {
               resAdded={this.props.resAdded}
               resRemove={this.props.resRemove}
               status={this.props.status}
+              disabled={this.props.disabled}
             />
           </div>
         </div>

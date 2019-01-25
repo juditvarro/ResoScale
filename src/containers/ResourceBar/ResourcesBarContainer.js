@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import * as actions from '../../actions/index';
 import ResourceBarNew from '../../components/Bar/ResourceBarNew'
 
 const mapStateToProps = state => state.resoScaleReducer;

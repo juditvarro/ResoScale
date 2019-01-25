@@ -10,7 +10,7 @@ import Page6 from '../../components/Form/Questionaire/Pages/Page6';
 import Page7 from '../../components/Form/Questionaire/Pages/Page7';
 import classes from './ResQuestionaire.css';
 // import Button from '../../UI/Button/Button'
-import questEvaluation from '../../assets/questionaireKey';
+import questEvaluation from '../../utils/questionaireKey';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/index';
 
@@ -26,6 +26,9 @@ class ResQuestionaire extends Component {
     }));
   }
 
+  componentDidMount() {
+    this.props.onListingResolutions()
+  }
 
   render() {
 
@@ -44,7 +47,7 @@ class ResQuestionaire extends Component {
 
           }}
           validationSchema={Yup.object().shape({
-            brain: Yup.string().required("Please pick one answer"),
+            brain: Yup.string().required("Please pick one answer1"),
             energy: Yup.string().required("Please pick one answer"),
             freetime: Yup.string().required("Please pick one answer"),
             health: Yup.string().required("Please pick one answer"),
@@ -79,11 +82,12 @@ class ResQuestionaire extends Component {
 
             return (
               <Form className={classes.FormPart}>
+                <div className={classes.CounterDiv}>You are at the {this.state.page + 1}. question and you have {pages.length - this.state.page - 1} more</div>
                 {pages[this.state.page]}
 
 
                 {this.state.page === pages.length - 1 ?
-                  <button type="submit">Submit</button> :
+                  <button type="submit" className={classes.SubmitBtn}>Submit</button> :
                   <button className={classes.NextBtn} onClick={this.pagenateHandler}>Next question</button>}
 
               </Form>
@@ -101,6 +105,7 @@ class ResQuestionaire extends Component {
 const mapDispatchToProps = dispatch => {
   return {
     onSettingResourcesBasedOnForm: (results) => dispatch(actions.setResources(results)),
+    onListingResolutions: () => dispatch(actions.fetchResolutions()),
   }
 }
 

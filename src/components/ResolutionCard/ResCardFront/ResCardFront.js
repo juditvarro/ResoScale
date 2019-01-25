@@ -9,7 +9,12 @@ const resCardFront = (props) => {
     <div style={{
       height: '70%'
     }}>{props.title}</div>
-    <ResCardButton resAdd={props.resAdd} resAdded={props.resAdded} resRemove={props.resRemove} />
+    <ResCardButton
+      resAdd={props.resAdd}
+      resAdded={props.resAdded}
+      resRemove={props.resRemove}
+      disabled={props.disabled}
+    />
   </div >);
 }
 
